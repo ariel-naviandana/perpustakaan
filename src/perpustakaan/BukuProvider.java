@@ -16,13 +16,13 @@ public class BukuProvider {
 
     public BukuProvider() {
         bukuCollection = new ArrayList<>();
-        bukuCollection.add(new Buku("Sherlock Holmes"));
-        bukuCollection.add(new Buku("Topeng Kaca"));
-        bukuCollection.add(new Buku("Doraemon"));
-        bukuCollection.add(new Buku("Petualangan Doraemon"));
-        bukuCollection.add(new Buku("Thomas and Friends"));
-        bukuCollection.add(new Buku("The Return of Sherlock Holmes"));
-        bukuCollection.add(new Buku("The Adventure of Sherlock Holmes"));
+        bukuCollection.add(new Buku(1, "Sherlock Holmes", "tersedia"));
+        bukuCollection.add(new Buku(2, "Topeng Kaca", "tersedia"));
+        bukuCollection.add(new Buku(3, "Doraemon", "tersedia"));
+        bukuCollection.add(new Buku(4, "Petualangan Doraemon", "tersedia"));
+        bukuCollection.add(new Buku(5, "Thomas and Friends", "tersedia"));
+        bukuCollection.add(new Buku(6, "The Return of Sherlock Holmes", "tersedia"));
+        bukuCollection.add(new Buku(7, "The Adventure of Sherlock Holmes", "tersedia"));
     }
 
     public static BukuProvider getInstance() {
@@ -45,4 +45,7 @@ public class BukuProvider {
         return foundBuku;
     }
 
+    public int getIdBaru() {
+        return bukuCollection.size() + 1;
+    }
 }
