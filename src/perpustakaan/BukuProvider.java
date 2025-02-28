@@ -48,4 +48,9 @@ public class BukuProvider {
     public int getIdBaru() {
         return bukuCollection.size() + 1;
     }
+
+    // update status saat peminjaman atau pengembalian
+    public void updateStatus(String status) {
+
+    }
 }
