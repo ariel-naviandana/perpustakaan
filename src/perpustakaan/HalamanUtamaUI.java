@@ -21,7 +21,7 @@ public class HalamanUtamaUI extends javax.swing.JFrame {
      */
     // @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -39,6 +39,11 @@ public class HalamanUtamaUI extends javax.swing.JFrame {
         jMenuBar1.add(menuPencarian);
 
         menuPeminjaman.setText("Peminjaman");
+        menuPeminjaman.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuPeminjamanMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(menuPeminjaman);
 
         setJMenuBar(jMenuBar1);
@@ -46,14 +51,21 @@ public class HalamanUtamaUI extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 257, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 257, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 135, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 135, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuPeminjamanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPeminjamanMouseClicked
+        Perpustakaan.controllerPeminjaman = new PeminjamanController();
+        Perpustakaan.controllerPeminjaman.showFormPeminjaman();
+    }//GEN-LAST:event_menuPeminjamanMouseClicked
 
     private void menuPencarianMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_menuPencarianMouseClicked
         Perpustakaan.controllerPencarian = new PencarianController();

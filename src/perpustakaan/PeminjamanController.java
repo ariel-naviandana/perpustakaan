@@ -9,8 +9,8 @@ public class PeminjamanController {
     ArrayList<Peminjaman> daftarPeminjaman = new ArrayList<>();
 
     public void showFormPeminjaman() {
-        Perpustakaan.formPencarian = new FormPencarian();
-        Perpustakaan.formPencarian.tampilkan();
+        Perpustakaan.formPeminjaman = new FormPeminjaman();
+        Perpustakaan.formPeminjaman.tampilkan();
     }
 
     public void cariBuku(String judul) {
