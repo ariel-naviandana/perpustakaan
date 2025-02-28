@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 public class BukuProvider {
 
+    // buat variabel instance untuk nyimpen objek BukuProvider, instance ditulis
+    // disini
+    private static BukuProvider instance;
     private ArrayList<Buku> bukuCollection;
 
     public BukuProvider() {
@@ -20,6 +23,14 @@ public class BukuProvider {
         bukuCollection.add(new Buku("Thomas and Friends"));
         bukuCollection.add(new Buku("The Return of Sherlock Holmes"));
         bukuCollection.add(new Buku("The Adventure of Sherlock Holmes"));
+    }
+
+    public static BukuProvider getInstance() {
+        // dicek dulu udah ada instance apa blum, kalo udah ada gausah bikin lagi,
+        // langsung return
+        if (instance == null)
+            instance = new BukuProvider();
+        return instance;
     }
 
     public ArrayList<Buku> selectBuku(String judul) {

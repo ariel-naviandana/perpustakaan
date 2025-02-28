@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package perpustakaan;
 
 // import java.awt.Dialog;
@@ -10,13 +10,16 @@ import java.util.ArrayList;
 
 public class PencarianController {
 
+    // ngambil instance dari method getInstance(), jadi gak perlu bikin baru pake
+    // new BukuProvider()
+    BukuProvider bukuProvider = BukuProvider.getInstance();
+
     public void showFormPencarian() {
         Perpustakaan.formPencarian = new FormPencarian();
         Perpustakaan.formPencarian.tampilkan();
     }
 
     public void cariBuku(String judul) {
-        BukuProvider bukuProvider = new BukuProvider();
         try {
             ArrayList<Buku> listBuku = bukuProvider.selectBuku(judul);
             if (listBuku.isEmpty()) {
