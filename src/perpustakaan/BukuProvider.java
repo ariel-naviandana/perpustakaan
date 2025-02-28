@@ -53,4 +53,8 @@ public class BukuProvider {
     public void updateStatus(String status) {
 
     }
+
+    public ArrayList<Buku> getSemuaBuku() {
+        return bukuCollection;
+    }
 }

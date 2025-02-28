@@ -60,4 +60,9 @@ public class PeminjamanProvider {
     public boolean save(ArrayList<Peminjaman> daftarPeminjaman) {
         return true;
     }
+    
+    //panggil updateTanggalPengembalian dan bukuProvider.updateStatus, jika id tidak ada return -1. jika ada dan pengembalian tepat waktu return 0, jika tidak tepat waktu return telat beraoa hari
+    public int pengembalian(int id){
+        return 0;
+    }
 }
