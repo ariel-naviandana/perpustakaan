@@ -1,22 +1,16 @@
-/*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
 package perpustakaan;
 
-// import java.awt.Dialog;
 import java.util.ArrayList;
 
-public class PencarianController {
+public class PeminjamanController {
 
-    // ngambil instance dari method getInstance(), jadi gak perlu bikin baru pake
-    // new BukuProvider()
     BukuProvider bukuProvider = BukuProvider.getInstance();
+    PeminjamanProvider peminjamaProvider = PeminjamanProvider.getInstance();
+    ArrayList<Peminjaman> daftarPeminjaman = new ArrayList<>();
 
-    public void showFormPencarian() {
-        Perpustakaan.formPencarian = new FormPencarian();
-        Perpustakaan.formPencarian.tampilkan();
+    public void showFormPeminjaman() {
+        Perpustakaan.formPeminjaman = new FormPeminjaman();
+        Perpustakaan.formPeminjaman.tampilkan();
     }
 
     public void cariBuku(String judul) {
@@ -35,6 +29,20 @@ public class PencarianController {
             dialogUI.setLocationRelativeTo(null);
             dialogUI.setVisible(true);
         }
+    }
+
+    // dipanggil saat klik konfirmasi, kasih try catch dan cek if else, karena
+    // return dari provider berupa boolean, jika false atau catch tampilkan dialogui
+    public void pinjam() {
+        peminjamaProvider.save(daftarPeminjaman);
+    }
+
+    // dipanggil saat klik pinjam, .add di collection daftarPeminjaman
+    public void tambah() {
+    }
+
+    // dipanggil saat klik hapus, .remove di collection daftarPeminjaman
+    public void hapus() {
     }
 
 }
