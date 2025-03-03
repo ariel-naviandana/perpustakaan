@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class PeminjamanController {
 
     BukuProvider bukuProvider = BukuProvider.getInstance();
-    PeminjamanProvider peminjamanProvider = PeminjamanProvider.getInstance();
+    PeminjamanManager peminjamanProvider = PeminjamanManager.getInstance();
     ArrayList<Peminjaman> daftarPeminjaman = new ArrayList<>();
 
     public void showFormPeminjaman() {
@@ -55,7 +55,7 @@ public class PeminjamanController {
     }
 
     // dipanggil saat klik pinjam, .add di collection daftarPeminjaman
-    public void tambah(int idBuku, Date tanggalPengembalian) {
+    public void tambahBuku(int idBuku, Date tanggalPengembalian) {
         Date tanggalPeminjaman = new Date();
         LocalDate peminjamanLocalDate = tanggalPeminjaman.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate pengembalianLocalDate = tanggalPengembalian.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -83,7 +83,7 @@ public class PeminjamanController {
     }
 
     // dipanggil saat klik hapus, .remove di collection daftarPeminjaman
-    public void hapus(int id) {
+    public void hapusBuku(int id) {
         int index = 0;
         for(Peminjaman peminjaman : daftarPeminjaman){
             if(peminjaman.id == id){

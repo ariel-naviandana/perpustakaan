@@ -14,7 +14,7 @@ import java.util.Date;
 public class PengembalianController {
     
     BukuProvider bukuProvider = BukuProvider.getInstance();
-    PeminjamanProvider peminjamanProvider = PeminjamanProvider.getInstance();
+    PeminjamanManager peminjamanProvider = PeminjamanManager.getInstance();
 
     public void showFormPengembalian() {
         Perpustakaan.formPengembalian = new FormPengembalian();

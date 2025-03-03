@@ -8,16 +8,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class PeminjamanProvider {
+public class PeminjamanManager {
 
     // buat variabel instance untuk nyimpen objek PeminjamanProvider,
     // instance ditulis
     // disini
-    private static PeminjamanProvider instance;
+    private static PeminjamanManager instance;
     private ArrayList<Peminjaman> peminjamanCollection;
     private BukuProvider bukuProvider = BukuProvider.getInstance();
 
-    public PeminjamanProvider() {
+    public PeminjamanManager() {
         peminjamanCollection = new ArrayList<>();
         Calendar tanggalPeminjaman = Calendar.getInstance();
         tanggalPeminjaman.set(2025, Calendar.MARCH, 1);
@@ -34,11 +34,11 @@ public class PeminjamanProvider {
         peminjamanCollection.add(new Peminjaman(2, 2, tanggalPeminjaman.getTime(), tanggalJatuhTempo.getTime(), "dipinjam"));
     }
 
-    public static PeminjamanProvider getInstance() {
+    public static PeminjamanManager getInstance() {
         // dicek dulu udah ada instance apa blum, kalo udah ada gausah bikin lagi,
         // langsung return
         if (instance == null)
-            instance = new PeminjamanProvider();
+            instance = new PeminjamanManager();
         return instance;
     }
 
