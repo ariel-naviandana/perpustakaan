@@ -222,7 +222,7 @@ public class FormPeminjaman extends javax.swing.JFrame {
         int selectedRow = jTablePinjam.getSelectedRow();
         String judul = jTablePinjam.getValueAt(selectedRow, 0).toString();
         int idPinjam = peminjamanMap.get(judul);
-        Perpustakaan.controllerPeminjaman.hapus(idPinjam);
+        Perpustakaan.controllerPeminjaman.hapusBuku(idPinjam);
     }//GEN-LAST:event_jButtonHapusMouseClicked
 
     private void jButtonPinjamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPinjamMouseClicked

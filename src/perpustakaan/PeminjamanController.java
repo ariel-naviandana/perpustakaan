@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class PeminjamanController {
 
     BukuProvider bukuProvider = BukuProvider.getInstance();
-    PeminjamanProvider peminjamanProvider = PeminjamanProvider.getInstance();
+    PeminjamanManager peminjamanProvider = PeminjamanManager.getInstance();
     ArrayList<Peminjaman> daftarPeminjaman = new ArrayList<>();
 
     public void showFormPeminjaman() {
@@ -83,7 +83,7 @@ public class PeminjamanController {
     }
 
     // dipanggil saat klik hapus, .remove di collection daftarPeminjaman
-    public void hapus(int id) {
+    public void hapusBuku(int id) {
         int index = 0;
         for(Peminjaman peminjaman : daftarPeminjaman){
             if(peminjaman.id == id){
