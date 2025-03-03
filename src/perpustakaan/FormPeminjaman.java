@@ -24,10 +24,14 @@ public class FormPeminjaman extends javax.swing.JFrame {
     }
     
     public void tampilkan() {
-                this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                this.pack();
-                this.setLocationRelativeTo(null);
-                this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+    
+    public void tutup(){
+        this.setVisible(false);
     }
 
     /**

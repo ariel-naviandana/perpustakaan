@@ -50,6 +50,7 @@ public class PeminjamanController {
             dialogUI.pack();
             dialogUI.setLocationRelativeTo(null);
             dialogUI.setVisible(true);
+            Perpustakaan.formPeminjaman.tutup();
         }
     }
 
@@ -59,6 +60,17 @@ public class PeminjamanController {
         LocalDate peminjamanLocalDate = tanggalPeminjaman.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate pengembalianLocalDate = tanggalPengembalian.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         long diffInDays = ChronoUnit.DAYS.between(peminjamanLocalDate, pengembalianLocalDate);
+        
+        for (Peminjaman peminjaman : daftarPeminjaman) {
+            if (peminjaman.idBuku == idBuku) {
+                DialogUI dialogUI = new DialogUI("Buku ini sudah ada di daftar peminjaman");
+                dialogUI.pack();
+                dialogUI.setLocationRelativeTo(null);
+                dialogUI.setVisible(true);
+                return;
+            }
+        }
+        
         if(diffInDays > 3){
             DialogUI dialogUI = new DialogUI("Lama peminjaman buku tidak boleh lebih dari 3 hari");
             dialogUI.pack();
