@@ -16,6 +16,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Peminjaman"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuPeminjamanMouseClicked"/>
+          </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuPengembalian">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pengembalian"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuPengembalianMouseClicked"/>
+          </Events>
         </Menu>
       </SubComponents>
     </Menu>

@@ -7,10 +7,18 @@ package perpustakaan;
 
 public class Buku {
 
+    // primary key di buku
+    public int id;
     public String judul;
+    // ada 2 status: tersedia, dipinjam
+    public String status;
+    
+    public Buku(){}
 
-    public Buku(String judul) {
+    public Buku(int id, String judul, String status) {
+        this.id = id;
         this.judul = judul;
+        this.status = status;
     }
 
     // aku komen
