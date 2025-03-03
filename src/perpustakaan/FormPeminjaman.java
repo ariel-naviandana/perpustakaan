@@ -134,12 +134,6 @@ public class FormPeminjaman extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTableBuku);
 
-        jDateChooserTanggalPengembalian.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jDateChooserTanggalPengembalianMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,8 +158,9 @@ public class FormPeminjaman extends javax.swing.JFrame {
                                 .addComponent(jTextFieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonCari))
-                            .addComponent(jLabelTglPengembalian)
-                            .addComponent(jDateChooserTanggalPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jDateChooserTanggalPengembalian, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelTglPengembalian, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -185,7 +180,7 @@ public class FormPeminjaman extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonHapus))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(4, 4, 4)
                         .addComponent(jDateChooserTanggalPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +231,7 @@ public class FormPeminjaman extends javax.swing.JFrame {
         String judul = jTableBuku.getValueAt(selectedRow, 0).toString();
         int idBuku = bukuMap.get(judul);
         Date tanggalPengembalian = jDateChooserTanggalPengembalian.getDate();
-        Perpustakaan.controllerPeminjaman.tambah(idBuku, tanggalPengembalian);
+        Perpustakaan.controllerPeminjaman.tambahBuku(idBuku, tanggalPengembalian);
     }//GEN-LAST:event_jButtonPinjamMouseClicked
 
     private void jTablePinjamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePinjamMouseClicked

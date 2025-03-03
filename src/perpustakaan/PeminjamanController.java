@@ -55,7 +55,7 @@ public class PeminjamanController {
     }
 
     // dipanggil saat klik pinjam, .add di collection daftarPeminjaman
-    public void tambah(int idBuku, Date tanggalPengembalian) {
+    public void tambahBuku(int idBuku, Date tanggalPengembalian) {
         Date tanggalPeminjaman = new Date();
         LocalDate peminjamanLocalDate = tanggalPeminjaman.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate pengembalianLocalDate = tanggalPengembalian.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
