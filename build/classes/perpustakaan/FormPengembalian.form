@@ -129,6 +129,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Konfirmasi"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonKonfirmasiMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

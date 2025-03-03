@@ -5,7 +5,10 @@
 package perpustakaan;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,12 +30,7 @@ public class FormPengembalian extends javax.swing.JFrame {
                 this.setVisible(true);
     }
     
-    public void displayPeminjamanSudahDikembalikan(ArrayList<Buku> bukuList) {
-    }
     
-    public void displayPeminjamanBelumDikembalikan(ArrayList<Buku> bukuList) {
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,6 +82,11 @@ public class FormPengembalian extends javax.swing.JFrame {
         jLabel2.setText("Histori Peminjaman Buku");
 
         jButtonKonfirmasi.setText("Konfirmasi");
+        jButtonKonfirmasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonKonfirmasiMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,6 +130,15 @@ public class FormPengembalian extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonKonfirmasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonKonfirmasiMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = jTablePeminjaman.getSelectedRow();
+        String judul = jTablePeminjaman.getValueAt(selectedRow, 0).toString();
+        int idPinjam = peminjamanMap.get(judul);
+        Date tanggalPengembalian = jDateChooserPengembalian.getDate();
+        Perpustakaan.controllerPengembalian.pengembalian(idPinjam, tanggalPengembalian);
+    }//GEN-LAST:event_jButtonKonfirmasiMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -161,6 +173,45 @@ public class FormPengembalian extends javax.swing.JFrame {
             }
         });
    
+    }
+    
+    private HashMap<String, Integer> peminjamanMap = new HashMap<>();
+    
+    // dipanggil saat selesai tambah atau hapus di controller, tampilkan di jTablePinjam
+    public void displayPeminjamanBelumDikembalikan(ArrayList<Peminjaman> peminjamanList, ArrayList<Buku> bukuList){
+                Object[] kolom = { "Judul" };
+                DefaultTableModel model = new DefaultTableModel(kolom, 0);
+
+                for (Peminjaman peminjaman : peminjamanList) {
+                    String judul = "";
+                        for (Buku buku : bukuList){
+                            if (buku.id == peminjaman.idBuku)
+                                judul = buku.judul;
+                        }
+                        Object[] baris = { judul };
+                        model.addRow(baris);
+                        peminjamanMap.put(judul, peminjaman.id);
+                }
+
+                jTablePeminjaman.setModel(model);
+    }
+    
+    public void displayPeminjamanSudahDikembalikan(ArrayList<Peminjaman> peminjamanList, ArrayList<Buku> bukuList){
+                Object[] kolom = { "Judul" };
+                DefaultTableModel model = new DefaultTableModel(kolom, 0);
+
+                for (Peminjaman peminjaman : peminjamanList) {
+                    String judul = "";
+                        for (Buku buku : bukuList){
+                            if (buku.id == peminjaman.idBuku)
+                                judul = buku.judul;
+                        }
+                        Object[] baris = { judul };
+                        model.addRow(baris);
+                        peminjamanMap.put(judul, peminjaman.id);
+                }
+
+                jTablePeminjamanSelesai.setModel(model);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

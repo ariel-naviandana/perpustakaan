@@ -17,7 +17,7 @@ public class BukuProvider {
     public BukuProvider() {
         bukuCollection = new ArrayList<>();
         bukuCollection.add(new Buku(1, "Sherlock Holmes", "tersedia"));
-        bukuCollection.add(new Buku(2, "Topeng Kaca", "tersedia"));
+        bukuCollection.add(new Buku(2, "Topeng Kaca", "dipinjam"));
         bukuCollection.add(new Buku(3, "Doraemon", "tersedia"));
         bukuCollection.add(new Buku(4, "Petualangan Doraemon", "tersedia"));
         bukuCollection.add(new Buku(5, "Thomas and Friends", "tersedia"));
@@ -38,7 +38,7 @@ public class BukuProvider {
         ArrayList<Buku> foundBuku = new ArrayList<>();
 
         for (Buku buku : this.bukuCollection) {
-            if (buku.judul.contains(judul))
+            if (buku.judul.contains(judul) && buku.status.contains("tersedia"))
                 foundBuku.add(buku);
         }
 
@@ -50,11 +50,27 @@ public class BukuProvider {
     }
 
     // update status saat peminjaman atau pengembalian
-    public void updateStatus(String status) {
-
+    public void updateStatus(int id) {
+        for(Buku buku : bukuCollection){
+            if(buku.id == id){
+                if(buku.status.contains("tersedia"))
+                    buku.status = "dipinjam";
+                else
+                    buku.status = "tersedia";
+            }
+        }
     }
 
     public ArrayList<Buku> getSemuaBuku() {
         return bukuCollection;
+    }
+    
+    public Buku getById(int id) {
+        Buku cariBuku = new Buku();
+        for(Buku buku : bukuCollection){
+            if(buku.id == id)
+                cariBuku = buku;
+        }
+        return cariBuku;
     }
 }

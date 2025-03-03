@@ -5,6 +5,8 @@
 package perpustakaan;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -52,8 +54,23 @@ public class FormPeminjaman extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonPinjam.setText("Pinjam");
+        jButtonPinjam.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonPinjamMouseClicked(evt);
+            }
+        });
+        jButtonPinjam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPinjamActionPerformed(evt);
+            }
+        });
 
         jButtonHapus.setText("Hapus");
+        jButtonHapus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonHapusMouseClicked(evt);
+            }
+        });
 
         jLabelTglPengembalian.setText("Tanggal Pengembalian");
 
@@ -74,11 +91,26 @@ public class FormPeminjaman extends javax.swing.JFrame {
 
             }
         ));
+        jTablePinjam.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablePinjamMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTablePinjam);
 
         jButtonCari.setText("Cari");
+        jButtonCari.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonCariMouseClicked(evt);
+            }
+        });
 
         jButtonKonfirmasi.setText("Konfirmasi");
+        jButtonKonfirmasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonKonfirmasiMouseClicked(evt);
+            }
+        });
 
         jTableBuku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,7 +123,18 @@ public class FormPeminjaman extends javax.swing.JFrame {
 
             }
         ));
+        jTableBuku.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableBukuMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableBuku);
+
+        jDateChooserTanggalPengembalian.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jDateChooserTanggalPengembalianMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,11 +145,11 @@ public class FormPeminjaman extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonHapus)
-                            .addComponent(jButtonPinjam))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonPinjam)
+                            .addComponent(jButtonHapus))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -156,6 +199,51 @@ public class FormPeminjaman extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCariActionPerformed
 
+    private void jButtonCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCariMouseClicked
+        // TODO add your handling code here:
+        String judul = jTextFieldCari.getText();
+        Perpustakaan.controllerPeminjaman.cariBuku(judul);
+    }//GEN-LAST:event_jButtonCariMouseClicked
+
+    private void jButtonPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPinjamActionPerformed
+        // TODO add your handling code here
+    }//GEN-LAST:event_jButtonPinjamActionPerformed
+
+    private void jTableBukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableBukuMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTableBukuMouseClicked
+
+    private void jDateChooserTanggalPengembalianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooserTanggalPengembalianMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateChooserTanggalPengembalianMouseClicked
+
+    private void jButtonHapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonHapusMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = jTablePinjam.getSelectedRow();
+        String judul = jTablePinjam.getValueAt(selectedRow, 0).toString();
+        int idPinjam = peminjamanMap.get(judul);
+        Perpustakaan.controllerPeminjaman.hapus(idPinjam);
+    }//GEN-LAST:event_jButtonHapusMouseClicked
+
+    private void jButtonPinjamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPinjamMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = jTableBuku.getSelectedRow();
+        String judul = jTableBuku.getValueAt(selectedRow, 0).toString();
+        int idBuku = bukuMap.get(judul);
+        Date tanggalPengembalian = jDateChooserTanggalPengembalian.getDate();
+        Perpustakaan.controllerPeminjaman.tambah(idBuku, tanggalPengembalian);
+    }//GEN-LAST:event_jButtonPinjamMouseClicked
+
+    private void jTablePinjamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePinjamMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTablePinjamMouseClicked
+
+    private void jButtonKonfirmasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonKonfirmasiMouseClicked
+        // TODO add your handling code here:
+        Perpustakaan.controllerPeminjaman.pinjam();
+    }//GEN-LAST:event_jButtonKonfirmasiMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -192,6 +280,9 @@ public class FormPeminjaman extends javax.swing.JFrame {
         });
     }
     
+    private HashMap<String, Integer> bukuMap = new HashMap<>();
+    private HashMap<String, Integer> peminjamanMap = new HashMap<>();
+    
     public void display(ArrayList<Buku> bukuList) {
                 Object[] kolom = { "Judul" };
                 DefaultTableModel model = new DefaultTableModel(kolom, 0);
@@ -199,14 +290,29 @@ public class FormPeminjaman extends javax.swing.JFrame {
                 for (Buku buku : bukuList) {
                         Object[] baris = { buku.judul };
                         model.addRow(baris);
+                        bukuMap.put(buku.judul, buku.id);
                 }
 
                 jTableBuku.setModel(model);
      }
     
     // dipanggil saat selesai tambah atau hapus di controller, tampilkan di jTablePinjam
-    public void displayPinjam(ArrayList<Peminjaman> peminjamanList){
-        
+    public void displayPinjam(ArrayList<Peminjaman> peminjamanList, ArrayList<Buku> bukuList){
+                Object[] kolom = { "Judul" };
+                DefaultTableModel model = new DefaultTableModel(kolom, 0);
+
+                for (Peminjaman peminjaman : peminjamanList) {
+                    String judul = "";
+                    for (Buku buku : bukuList){
+                        if (buku.id == peminjaman.idBuku)
+                            judul = buku.judul;
+                    }
+                    Object[] baris = { judul };
+                    model.addRow(baris);
+                    peminjamanMap.put(judul, peminjaman.id);
+                }
+
+                jTablePinjam.setModel(model);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
