@@ -39,8 +39,8 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jButtonKonfirmasi" min="-2" max="-2" attributes="0"/>
                   <Component id="jDateChooserPengembalian" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonKonfirmasi" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
           </Group>
@@ -59,9 +59,9 @@
                   <Component id="jScrollPane2" min="-2" pref="275" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               <Component id="jDateChooserPengembalian" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jButtonKonfirmasi" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
@@ -123,8 +123,6 @@
         <Property name="text" type="java.lang.String" value="Histori Peminjaman Buku"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserPengembalian">
-    </Component>
     <Component class="javax.swing.JButton" name="jButtonKonfirmasi">
       <Properties>
         <Property name="text" type="java.lang.String" value="Konfirmasi"/>
@@ -132,6 +130,8 @@
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonKonfirmasiMouseClicked"/>
       </Events>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserPengembalian">
     </Component>
   </SubComponents>
 </Form>
