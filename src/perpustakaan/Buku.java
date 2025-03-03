@@ -12,6 +12,8 @@ public class Buku {
     public String judul;
     // ada 2 status: tersedia, dipinjam
     public String status;
+    
+    public Buku(){}
 
     public Buku(int id, String judul, String status) {
         this.id = id;

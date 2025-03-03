@@ -5,7 +5,10 @@
 package perpustakaan;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,18 +24,13 @@ public class FormPengembalian extends javax.swing.JFrame {
     }
     
     public void tampilkan() {
-                this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                this.pack();
-                this.setLocationRelativeTo(null);
-                this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
     
-    public void displayPeminjamanSudahDikembalikan(ArrayList<Buku> bukuList) {
-    }
     
-    public void displayPeminjamanBelumDikembalikan(ArrayList<Buku> bukuList) {
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +48,7 @@ public class FormPengembalian extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jDateChooserPengembalian = new com.toedter.calendar.JDateChooser();
         jButtonKonfirmasi = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,51 +80,82 @@ public class FormPengembalian extends javax.swing.JFrame {
 
         jLabel1.setText("Peminjaman Buku");
 
-        jLabel2.setText("Histori Peminjaman Buku");
+        jLabel2.setText("Tanggal Pengembalian");
 
         jButtonKonfirmasi.setText("Konfirmasi");
+        jButtonKonfirmasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonKonfirmasiMouseClicked(evt);
+            }
+        });
+
+        jLabel3.setText("Histori Peminjaman Buku");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonKonfirmasi)
-                    .addComponent(jDateChooserPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(170, 170, 170))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonKonfirmasi)
+                                    .addComponent(jDateChooserPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(170, 170, 170))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(145, 145, 145))))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(255, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addGap(51, 51, 51)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addComponent(jLabel1)
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jDateChooserPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(26, 26, 26)
                 .addComponent(jButtonKonfirmasi)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(jLabel3)
+                    .addContainerGap(424, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonKonfirmasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonKonfirmasiMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = jTablePeminjaman.getSelectedRow();
+        String judul = jTablePeminjaman.getValueAt(selectedRow, 0).toString();
+        int idPinjam = peminjamanMap.get(judul);
+        Date tanggalPengembalian = jDateChooserPengembalian.getDate();
+        Perpustakaan.controllerPengembalian.pengembalian(idPinjam, tanggalPengembalian);
+    }//GEN-LAST:event_jButtonKonfirmasiMouseClicked
 
     /**
      * @param args the command line arguments
@@ -162,12 +192,52 @@ public class FormPengembalian extends javax.swing.JFrame {
         });
    
     }
+    
+    private HashMap<String, Integer> peminjamanMap = new HashMap<>();
+    
+    // dipanggil saat selesai tambah atau hapus di controller, tampilkan di jTablePinjam
+    public void displayPeminjamanBelumDikembalikan(ArrayList<Peminjaman> peminjamanList, ArrayList<Buku> bukuList){
+                Object[] kolom = { "Judul" };
+                DefaultTableModel model = new DefaultTableModel(kolom, 0);
+
+                for (Peminjaman peminjaman : peminjamanList) {
+                    String judul = "";
+                        for (Buku buku : bukuList){
+                            if (buku.id == peminjaman.idBuku)
+                                judul = buku.judul;
+                        }
+                        Object[] baris = { judul };
+                        model.addRow(baris);
+                        peminjamanMap.put(judul, peminjaman.id);
+                }
+
+                jTablePeminjaman.setModel(model);
+    }
+    
+    public void displayPeminjamanSudahDikembalikan(ArrayList<Peminjaman> peminjamanList, ArrayList<Buku> bukuList){
+                Object[] kolom = { "Judul" };
+                DefaultTableModel model = new DefaultTableModel(kolom, 0);
+
+                for (Peminjaman peminjaman : peminjamanList) {
+                    String judul = "";
+                        for (Buku buku : bukuList){
+                            if (buku.id == peminjaman.idBuku)
+                                judul = buku.judul;
+                        }
+                        Object[] baris = { judul };
+                        model.addRow(baris);
+                        peminjamanMap.put(judul, peminjaman.id);
+                }
+
+                jTablePeminjamanSelesai.setModel(model);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonKonfirmasi;
     private com.toedter.calendar.JDateChooser jDateChooserPengembalian;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTablePeminjaman;

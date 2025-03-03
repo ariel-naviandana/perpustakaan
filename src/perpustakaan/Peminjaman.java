@@ -11,20 +11,25 @@ public class Peminjaman {
     public Date tanggalJatuhTempo;
     // tanggal buku dikembalikan sebenarnya
     public Date tanggalPengembalian;
+    public String status; //dipinjam, dikembalikan
 
-    public Peminjaman(int id, int idBuku, Date tanggalPeminjaman, Date tanggalJatuhTempo) {
+    Peminjaman(){}
+    
+    public Peminjaman(int id, int idBuku, Date tanggalPeminjaman, Date tanggalJatuhTempo, String status) {
         this.id = id;
         this.idBuku = idBuku;
         this.tanggalPeminjaman = tanggalPeminjaman;
         this.tanggalJatuhTempo = tanggalJatuhTempo;
+        this.status = status;
     }
 
-    public Peminjaman(int id, int idBuku, Date tanggalPeminjaman, Date tanggalJatuhTempo, Date tanggalPengembalian) {
+    public Peminjaman(int id, int idBuku, Date tanggalPeminjaman, Date tanggalJatuhTempo, Date tanggalPengembalian, String status) {
         this.id = id;
         this.idBuku = idBuku;
         this.tanggalPeminjaman = tanggalPeminjaman;
         this.tanggalJatuhTempo = tanggalJatuhTempo;
         this.tanggalPengembalian = tanggalPengembalian;
+        this.status = status;
     }
 
     public void updateTanggalPengembalian(Date tanggalPengembalian) {
