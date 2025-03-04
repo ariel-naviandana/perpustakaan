@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package perpustakaan;
 
 import java.time.LocalDate;
@@ -13,16 +9,9 @@ import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author ariel
- */
 public class FormPeminjaman extends javax.swing.JFrame {
     private ArrayList<Peminjaman> daftarPeminjaman = new ArrayList<>();
 
-    /**
-     * Creates new form FormPeminjaman2
-     */
     public FormPeminjaman() {
         initComponents();
     }
@@ -38,14 +27,13 @@ public class FormPeminjaman extends javax.swing.JFrame {
         this.setVisible(false);
     }
 
-    // dipanggil saat klik pinjam, .add di collection daftarPeminjaman
     public void tambahBuku(int idBuku, Date tanggalPengembalian) {
         Date tanggalPeminjaman = new Date();
         LocalDate peminjamanLocalDate = tanggalPeminjaman.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate pengembalianLocalDate = tanggalPengembalian.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         long diffInDays = ChronoUnit.DAYS.between(peminjamanLocalDate, pengembalianLocalDate);
         
-        for (Peminjaman peminjaman : Perpustakaan.controllerPeminjaman.getDaftarPeminjaman()) {
+        for (Peminjaman peminjaman : daftarPeminjaman) {
             if (peminjaman.idBuku == idBuku) {
             DialogUI dialogUI = new DialogUI("Buku ini sudah ada di daftar peminjaman");
             dialogUI.pack();
@@ -61,18 +49,17 @@ public class FormPeminjaman extends javax.swing.JFrame {
             dialogUI.setLocationRelativeTo(null);
             dialogUI.setVisible(true);
         } else {
-            daftarPeminjaman.add(new Peminjaman(peminjamanProvider.getIdBaru() + daftarPeminjaman.size(), idBuku, tanggalPeminjaman, tanggalPengembalian, "dipinjam"));
-            Perpustakaan.formPeminjaman.show(daftarPeminjaman, bukuProvider.getSemuaBuku());
+            daftarPeminjaman.add(new Peminjaman(Perpustakaan.controllerPeminjaman.getIdBaru() + daftarPeminjaman.size(), idBuku, tanggalPeminjaman, tanggalPengembalian, "dipinjam"));
+            Perpustakaan.formPeminjaman.show(daftarPeminjaman, Perpustakaan.controllerPeminjaman.getSemuaBuku());
         }
     }
 
-    // dipanggil saat klik hapus, .remove di collection daftarPeminjaman
     public void hapusBuku(int id) {
         int index = 0;
         for(Peminjaman peminjaman : daftarPeminjaman){
             if(peminjaman.id == id){
                 daftarPeminjaman.remove(index);
-                Perpustakaan.formPeminjaman.show(daftarPeminjaman, bukuProvider.getSemuaBuku());
+                Perpustakaan.formPeminjaman.show(daftarPeminjaman, Perpustakaan.controllerPeminjaman.getSemuaBuku());
                 return;
             }
             index++;
@@ -244,7 +231,6 @@ public class FormPeminjaman extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCariActionPerformed
 
     private void jButtonCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCariMouseClicked
-        // TODO add your handling code here:
         String judul = jTextFieldCari.getText();
         Perpustakaan.controllerPeminjaman.cariBuku(judul);
     }//GEN-LAST:event_jButtonCariMouseClicked
@@ -263,20 +249,18 @@ public class FormPeminjaman extends javax.swing.JFrame {
     }//GEN-LAST:event_jDateChooserTanggalPengembalianMouseClicked
 
     private void jButtonHapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonHapusMouseClicked
-        // TODO add your handling code here:
         int selectedRow = jTablePinjam.getSelectedRow();
         String judul = jTablePinjam.getValueAt(selectedRow, 0).toString();
         int idPinjam = peminjamanMap.get(judul);
-        Perpustakaan.controllerPeminjaman.hapusBuku(idPinjam);
+        hapusBuku(idPinjam);
     }//GEN-LAST:event_jButtonHapusMouseClicked
 
     private void jButtonPinjamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPinjamMouseClicked
-        // TODO add your handling code here:
         int selectedRow = jTableBuku.getSelectedRow();
         String judul = jTableBuku.getValueAt(selectedRow, 0).toString();
         int idBuku = bukuMap.get(judul);
         Date tanggalPengembalian = jDateChooserTanggalPengembalian.getDate();
-        Perpustakaan.controllerPeminjaman.tambahBuku(idBuku, tanggalPengembalian);
+        tambahBuku(idBuku, tanggalPengembalian);
     }//GEN-LAST:event_jButtonPinjamMouseClicked
 
     private void jTablePinjamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePinjamMouseClicked
@@ -284,8 +268,7 @@ public class FormPeminjaman extends javax.swing.JFrame {
     }//GEN-LAST:event_jTablePinjamMouseClicked
 
     private void jButtonKonfirmasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonKonfirmasiMouseClicked
-        // TODO add your handling code here:
-        Perpustakaan.controllerPeminjaman.pinjam();
+        Perpustakaan.controllerPeminjaman.pinjam(daftarPeminjaman);
     }//GEN-LAST:event_jButtonKonfirmasiMouseClicked
 
     /**
@@ -340,7 +323,6 @@ public class FormPeminjaman extends javax.swing.JFrame {
                 jTableBuku.setModel(model);
      }
     
-    // dipanggil saat selesai tambah atau hapus di controller, tampilkan di jTablePinjam
     public void show(ArrayList<Peminjaman> peminjamanList, ArrayList<Buku> bukuList){
                 Object[] kolom = { "Judul" };
                 DefaultTableModel model = new DefaultTableModel(kolom, 0);

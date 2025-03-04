@@ -7,11 +7,9 @@ public class Peminjaman {
     public int id;
     public int idBuku;
     public Date tanggalPeminjaman;
-    // tanggal target buku dikembalikan
     public Date tanggalJatuhTempo;
-    // tanggal buku dikembalikan sebenarnya
     public Date tanggalPengembalian;
-    public String status; //dipinjam, dikembalikan
+    public String status;
 
     Peminjaman(){}
     
@@ -30,10 +28,6 @@ public class Peminjaman {
         this.tanggalJatuhTempo = tanggalJatuhTempo;
         this.tanggalPengembalian = tanggalPengembalian;
         this.status = status;
-    }
-
-    public void updateTanggalPengembalian(Date tanggalPengembalian) {
-        this.tanggalPengembalian = tanggalPengembalian;
     }
 
 }

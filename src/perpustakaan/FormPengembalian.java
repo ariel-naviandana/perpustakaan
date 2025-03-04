@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package perpustakaan;
 
 import java.util.ArrayList;
@@ -10,15 +6,8 @@ import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author ariel
- */
 public class FormPengembalian extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormPengembalian
-     */
     public FormPengembalian() {
         initComponents();
     }
@@ -195,7 +184,6 @@ public class FormPengembalian extends javax.swing.JFrame {
     
     private HashMap<String, Integer> peminjamanMap = new HashMap<>();
     
-    // dipanggil saat selesai tambah atau hapus di controller, tampilkan di jTablePinjam
     public void displayPeminjamanBelumDikembalikan(ArrayList<Peminjaman> peminjamanList, ArrayList<Buku> bukuList){
                 Object[] kolom = { "Judul" };
                 DefaultTableModel model = new DefaultTableModel(kolom, 0);

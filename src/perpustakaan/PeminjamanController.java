@@ -1,23 +1,17 @@
 package perpustakaan;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class PeminjamanController {
 
     BukuProvider bukuProvider = BukuProvider.getInstance();
     PeminjamanManager peminjamanProvider = PeminjamanManager.getInstance();
-    ArrayList<Peminjaman> daftarPeminjaman = new ArrayList<>();
 
     public void showFormPeminjaman() {
         Perpustakaan.formPeminjaman = new FormPeminjaman();
         Perpustakaan.formPeminjaman.tampilkan();
     }
-    
+
     public void cariBuku(String judul) {
         try {
             ArrayList<Buku> listBuku = bukuProvider.selectBuku(judul);
@@ -36,22 +30,28 @@ public class PeminjamanController {
         }
     }
 
-    // dipanggil saat klik konfirmasi, kasih try catch dan cek if else, karena
-    // return dari provider berupa boolean, jika false atau catch tampilkan dialogui
-    public void pinjam() {
+    public void pinjam(ArrayList<Peminjaman> daftarPeminjaman) {
         boolean valid = peminjamanProvider.save(daftarPeminjaman);
-        if(!valid){
+        if (!valid) {
             DialogUI dialogUI = new DialogUI("Jumlah buku tidak boleh lebih dari 10");
             dialogUI.pack();
             dialogUI.setLocationRelativeTo(null);
             dialogUI.setVisible(true);
-        }else{
+        } else {
             DialogUI dialogUI = new DialogUI("Peminjaman buku telah dikonfirmasi");
             dialogUI.pack();
             dialogUI.setLocationRelativeTo(null);
             dialogUI.setVisible(true);
             Perpustakaan.formPeminjaman.tutup();
         }
+    }
+    
+    public int getIdBaru() {
+        return peminjamanProvider.getIdBaru();
+    }
+    
+    public ArrayList<Buku> getSemuaBuku() {
+        return bukuProvider.getSemuaBuku();
     }
 
 }
