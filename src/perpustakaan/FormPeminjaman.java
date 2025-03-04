@@ -4,6 +4,9 @@
  */
 package perpustakaan;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ariel
  */
 public class FormPeminjaman extends javax.swing.JFrame {
+    private ArrayList<Peminjaman> daftarPeminjaman = new ArrayList<>();
 
     /**
      * Creates new form FormPeminjaman2
@@ -32,6 +36,47 @@ public class FormPeminjaman extends javax.swing.JFrame {
     
     public void tutup(){
         this.setVisible(false);
+    }
+
+    // dipanggil saat klik pinjam, .add di collection daftarPeminjaman
+    public void tambahBuku(int idBuku, Date tanggalPengembalian) {
+        Date tanggalPeminjaman = new Date();
+        LocalDate peminjamanLocalDate = tanggalPeminjaman.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate pengembalianLocalDate = tanggalPengembalian.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        long diffInDays = ChronoUnit.DAYS.between(peminjamanLocalDate, pengembalianLocalDate);
+        
+        for (Peminjaman peminjaman : Perpustakaan.controllerPeminjaman.getDaftarPeminjaman()) {
+            if (peminjaman.idBuku == idBuku) {
+            DialogUI dialogUI = new DialogUI("Buku ini sudah ada di daftar peminjaman");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);
+            return;
+            }
+        }
+        
+        if(diffInDays > 3){
+            DialogUI dialogUI = new DialogUI("Lama peminjaman buku tidak boleh lebih dari 3 hari");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);
+        } else {
+            daftarPeminjaman.add(new Peminjaman(peminjamanProvider.getIdBaru() + daftarPeminjaman.size(), idBuku, tanggalPeminjaman, tanggalPengembalian, "dipinjam"));
+            Perpustakaan.formPeminjaman.show(daftarPeminjaman, bukuProvider.getSemuaBuku());
+        }
+    }
+
+    // dipanggil saat klik hapus, .remove di collection daftarPeminjaman
+    public void hapusBuku(int id) {
+        int index = 0;
+        for(Peminjaman peminjaman : daftarPeminjaman){
+            if(peminjaman.id == id){
+                daftarPeminjaman.remove(index);
+                Perpustakaan.formPeminjaman.show(daftarPeminjaman, bukuProvider.getSemuaBuku());
+                return;
+            }
+            index++;
+        }
     }
 
     /**
@@ -296,7 +341,7 @@ public class FormPeminjaman extends javax.swing.JFrame {
      }
     
     // dipanggil saat selesai tambah atau hapus di controller, tampilkan di jTablePinjam
-    public void displayPinjam(ArrayList<Peminjaman> peminjamanList, ArrayList<Buku> bukuList){
+    public void show(ArrayList<Peminjaman> peminjamanList, ArrayList<Buku> bukuList){
                 Object[] kolom = { "Judul" };
                 DefaultTableModel model = new DefaultTableModel(kolom, 0);
 
