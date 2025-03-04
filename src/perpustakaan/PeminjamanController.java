@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class PeminjamanController {
 
     BukuProvider bukuProvider = BukuProvider.getInstance();
-    PeminjamanManager peminjamanProvider = PeminjamanManager.getInstance();
+    PeminjamanManager peminjamanManger = PeminjamanManager.getInstance();
 
     public void showFormPeminjaman() {
         Perpustakaan.formPeminjaman = new FormPeminjaman();
@@ -39,7 +39,7 @@ public class PeminjamanController {
             return;
         }
         
-        boolean valid = peminjamanProvider.save(daftarPeminjaman);
+        boolean valid = peminjamanManger.save(daftarPeminjaman);
         if (!valid) {
             DialogUI dialogUI = new DialogUI("Connection Error");
             dialogUI.pack();
@@ -55,7 +55,7 @@ public class PeminjamanController {
     }
     
     public int getIdBaru() {
-        return peminjamanProvider.getIdBaru();
+        return peminjamanManger.getIdBaru();
     }
     
     public ArrayList<Buku> getSemuaBuku() {
