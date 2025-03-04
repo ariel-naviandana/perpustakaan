@@ -17,8 +17,9 @@ public class PengembalianController {
     
     public void pengembalian(int id, Date tanggalPengembalian){
         long telat = peminjamanProvider.pengembalian(id, tanggalPengembalian);
+        double denda = telat * 2000;
         if(telat > 0){
-            DialogUI dialogUI = new DialogUI("Anda telat " + telat + " hari");
+            DialogUI dialogUI = new DialogUI("Anda telat " + telat + " hari, bayar denda sebesar Rp. " + denda);
             dialogUI.pack();
             dialogUI.setLocationRelativeTo(null);
             dialogUI.setVisible(true);
