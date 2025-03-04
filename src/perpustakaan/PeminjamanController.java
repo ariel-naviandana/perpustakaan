@@ -31,9 +31,17 @@ public class PeminjamanController {
     }
 
     public void pinjam(ArrayList<Peminjaman> daftarPeminjaman) {
+        if(daftarPeminjaman.size() > 10){
+            DialogUI dialogUI = new DialogUI("Jumlah buku tidak boleh lebih dari 10");
+            dialogUI.pack();
+            dialogUI.setLocationRelativeTo(null);
+            dialogUI.setVisible(true);
+            return;
+        }
+        
         boolean valid = peminjamanProvider.save(daftarPeminjaman);
         if (!valid) {
-            DialogUI dialogUI = new DialogUI("Jumlah buku tidak boleh lebih dari 10");
+            DialogUI dialogUI = new DialogUI("Connection Error");
             dialogUI.pack();
             dialogUI.setLocationRelativeTo(null);
             dialogUI.setVisible(true);

@@ -35,7 +35,6 @@ public class PeminjamanManager {
         return instance;
     }
 
-    // return peminjaman yang sudah ada tanggalpengembalian
     public ArrayList<Peminjaman> getPeminjamanSudahDikembalian() {
         ArrayList<Peminjaman> daftarPeminjaman = new ArrayList<>();
         for (Peminjaman peminjaman : peminjamanCollection) {
@@ -55,15 +54,15 @@ public class PeminjamanManager {
     }
 
     public boolean save(ArrayList<Peminjaman> daftarPeminjaman) {
-        if (daftarPeminjaman.size() > 10) {
+        try{
+            for (Peminjaman peminjaman : daftarPeminjaman) {
+                peminjamanCollection.add(peminjaman);
+                bukuProvider.updateStatus(peminjaman.idBuku);
+            }
+            return true;
+        } catch(Exception ex){
             return false;
         }
-
-        for (Peminjaman peminjaman : daftarPeminjaman) {
-            peminjamanCollection.add(peminjaman);
-            bukuProvider.updateStatus(peminjaman.idBuku);
-        }
-        return true;
     }
 
     public long pengembalian(int id, Date tanggalPengembalian) {
