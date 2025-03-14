@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class PeminjamanController {
 
     BukuProvider bukuProvider = BukuProvider.getInstance();
-    PeminjamanManager peminjamanProvider = PeminjamanManager.getInstance();
+    PeminjamanManager peminjamanManager = PeminjamanManager.getInstance();
 
     public void showFormPeminjaman() {
         Perpustakaan.formPeminjaman = new FormPeminjaman();
@@ -31,31 +31,38 @@ public class PeminjamanController {
     }
 
     public void pinjam(ArrayList<Peminjaman> daftarPeminjaman) {
-        if(daftarPeminjaman.size() > 10){
-            DialogUI dialogUI = new DialogUI("Jumlah buku tidak boleh lebih dari 10");
-            dialogUI.pack();
-            dialogUI.setLocationRelativeTo(null);
-            dialogUI.setVisible(true);
-            return;
-        }
+        try{
+            if(daftarPeminjaman.size() > 10){
+                DialogUI dialogUI = new DialogUI("Jumlah buku tidak boleh lebih dari 10");
+                dialogUI.pack();
+                dialogUI.setLocationRelativeTo(null);
+                dialogUI.setVisible(true);
+                return;
+            }
         
-        boolean valid = peminjamanProvider.save(daftarPeminjaman);
-        if (!valid) {
+            boolean valid = peminjamanManager.save(daftarPeminjaman);
+            if (!valid) {
+                DialogUI dialogUI = new DialogUI("Connection Error");
+                dialogUI.pack();
+                dialogUI.setLocationRelativeTo(null);
+                dialogUI.setVisible(true);
+            } else {
+                DialogUI dialogUI = new DialogUI("Peminjaman buku telah dikonfirmasi");
+                dialogUI.pack();
+                dialogUI.setLocationRelativeTo(null);
+                dialogUI.setVisible(true);
+                Perpustakaan.formPeminjaman.tutup();
+            }
+        } catch (Exception ex){
             DialogUI dialogUI = new DialogUI("Connection Error");
             dialogUI.pack();
             dialogUI.setLocationRelativeTo(null);
             dialogUI.setVisible(true);
-        } else {
-            DialogUI dialogUI = new DialogUI("Peminjaman buku telah dikonfirmasi");
-            dialogUI.pack();
-            dialogUI.setLocationRelativeTo(null);
-            dialogUI.setVisible(true);
-            Perpustakaan.formPeminjaman.tutup();
         }
     }
     
     public int getIdBaru() {
-        return peminjamanProvider.getIdBaru();
+        return peminjamanManager.getIdBaru();
     }
     
     public ArrayList<Buku> getSemuaBuku() {
